@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import db from "./src/configurations/database/database.configuration.js";
+import ProjectRoutes from "./src/routes/project.routes.js";
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ db.authenticate()
     db.sync({ alter: true })
       .then((result) => {
         app.listen(process.env.PORT_NUMBER, () =>
-          console.log(" \n Daily-Report is started \n"),
+          console.log(" \n Project-Management is started \n"),
         );
       })
       .catch((error) => {
@@ -21,5 +22,7 @@ db.authenticate()
       });
   })
   .catch((error) => {
-    console.log("Daily Report cannot connect to database: " + error);
+    console.log("Project-Management cannot connect to database: " + error);
   });
+
+app.use(ProjectRoutes);
